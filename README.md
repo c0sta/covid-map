@@ -4,6 +4,6 @@ Global map showing the number of confirmed cases, recovered and deaths caused by
 
 # Development
 
-(API)[https://corona.lmao.ninja/v2/countries]
+[API](https://corona.lmao.ninja/v2/countries)
 React Native
 TypeScript
