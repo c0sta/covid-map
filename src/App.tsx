@@ -1,5 +1,5 @@
 import React from 'react';
-import {Map} from './components/Map/Map';
+import Map from './components/Map/Map';
 import {View, StyleSheet, StatusBar} from 'react-native';
 
 const App: React.FC = () => {
