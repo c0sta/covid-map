@@ -1,13 +1,14 @@
 import * as React from 'react';
-import MapView from 'react-native-maps';
-import {StyleSheet} from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
+import {Text, Image} from 'react-native';
 import {getData} from '../../services/get-data';
-import Pointer from '../Pointer/Pointer';
 // Dark mode map styles
-import {mapStyle} from './Map.style';
+import {mapStyle} from './Map.dark';
+import {styles} from './Map.style';
 export interface CountryInfo {
   _id: number;
-  initials: string;
+  iso2: string;
+  iso3: string;
   lat: number;
   long: number;
   flag: string;
@@ -29,52 +30,69 @@ export interface CountryI {
   testsPerOneMillion: number;
 }
 
-interface MapState {
+interface MarkerState {
   countries: Array<CountryI>;
+  tracksViewChanges: boolean;
 }
-
-export const Map: React.FC = () => {
-  const [countries, setCountries] = React.useState([]);
-
-  React.useEffect(() => {
+class Map extends React.Component<{}, MarkerState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      countries: [],
+      tracksViewChanges: true,
+    };
+  }
+  componentDidMount() {
     getData('/countries')
       .then((response) => {
-        setCountries(response);
+        this.setState({countries: response});
+        setTimeout(this.disableViewChangesTracker, 2000);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
 
-  return (
-    <MapView
-      customMapStyle={mapStyle}
-      cacheEnabled={true}
-      loadingEnabled={true}
-      style={styles.mapView}>
-      {countries.map((country: CountryI) => {
-        const latLng = {
-          latitude: country.countryInfo.lat,
-          longitude: country.countryInfo.long,
-        };
-        return (
-          <Pointer
-            key={country.countryInfo._id || Math.random()}
-            latLng={latLng}
-            country={country}
-          />
-        );
-      })}
-    </MapView>
-  );
-};
-const styles = StyleSheet.create({
-  mapView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
-  mapContainer: {
-    flex: 1,
-  },
-});
+  disableViewChangesTracker = () => {
+    return this.setState({tracksViewChanges: false});
+  };
+
+  render() {
+    const {countries, tracksViewChanges} = this.state;
+    return (
+      <MapView
+        customMapStyle={mapStyle}
+        cacheEnabled={true}
+        loadingEnabled={true}
+        style={styles.mapView}>
+        {countries.map((item: CountryI) => {
+          const {
+            countryInfo: {_id, lat, long},
+            cases,
+          } = item;
+
+          const latLng = {
+            latitude: lat,
+            longitude: long,
+          };
+          return (
+            <Marker
+              key={_id || Math.random()}
+              style={styles.markerContainer}
+              coordinate={latLng}
+              tracksViewChanges={tracksViewChanges}>
+              {/* <Image
+                style={styles.flagImg}
+                source={{
+                  uri: flag,
+                }}
+                onLoad={() => this.disableViewChangesTracker}
+              /> */}
+              <Text style={styles.markerTitle}>{cases}</Text>
+            </Marker>
+          );
+        })}
+      </MapView>
+    );
+  }
+}
+
+export default Map;
