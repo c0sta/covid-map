@@ -11,16 +11,23 @@ export const styles = StyleSheet.create({
   mapContainer: {
     flex: 1,
   },
-  markerContainer: {
-    backgroundColor: 'red',
-    borderRadius: 10,
+  cardContainer: {
+    borderRadius: 100,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: 'white',
+    backgroundColor: 'tomato',
+    color: 'white',
   },
   markerTitle: {
     color: '#fff',
+    // backgroundColor: 'blue',
+    borderBottomEndRadius: 10,
     padding: 15,
   },
   flagImg: {
-    width: 25,
-    height: 25,
+    width: 30,
+    height: 30,
+    borderRadius: 100,
   },
 });
