@@ -1,26 +1,26 @@
 import React from 'react';
-import {Map} from './components/Map/Map';
-import {View, StyleSheet, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
+import Routes from './routes/routes';
 
 const App: React.FC = () => {
   return (
-    <View style={styles.mapContainer}>
+    <>
       <StatusBar
         barStyle="light-content"
         backgroundColor="rgba(255, 255, 255, 0)"
         translucent={true}
       />
-      <Map />
-    </View>
+      <Routes />
+    </>
   );
 };
 
 export default App;
 
-const styles = StyleSheet.create({
-  mapContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   mapContainer: {
+//     flex: 1,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//   },
+// });
