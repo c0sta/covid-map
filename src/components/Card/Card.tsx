@@ -1,32 +1,10 @@
 import React, {ReactElement} from 'react';
 import {Image, Text, View} from 'react-native';
 import {styles} from './Card.style';
+import {CountryI} from '../Map/utils/MapInterfaces';
 
 interface CardProps {
-  currentCountry: {
-    active: Number;
-    cases: Number;
-    casesPerOneMillion: Number;
-    continent: 'Africa';
-    country: 'Zimbabwe';
-    countryInfo: {
-      _id: Number;
-      flag: 'https://disease.sh/assets/img/flags/zw.png';
-      iso2: 'ZW';
-      iso3: 'ZWE';
-      lat: Number;
-      long: Number;
-    };
-    critical: Number;
-    deaths: Number;
-    deathsPerOneMillion: Number;
-    recovered: Number;
-    tests: Number;
-    testsPerOneMillion: Number;
-    todayCases: Number;
-    todayDeaths: Number;
-    updated: Number;
-  };
+  currentCountry: CountryI;
   handleTracksViewChanges: Function;
 }
 
