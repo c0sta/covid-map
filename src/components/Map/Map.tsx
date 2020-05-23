@@ -2,55 +2,10 @@ import * as React from 'react';
 import MapView from 'react-native-maps';
 import {getData} from '../../services/get-data';
 import {getCountryNameByLatlng} from './services/map-api';
-// Dark mode map styles
-import {mapStyle} from './Map.dark';
+import {mapStyle} from './styles/Map.dark';
 import {styles} from './Map.style';
 import Pointer from '../Pointer/Pointer';
-export interface CountryInfo {
-  _id: number;
-  iso2: string;
-  iso3: string;
-  lat: number;
-  long: number;
-  flag: string;
-}
-export interface CountryI {
-  country: string;
-  continent: string;
-  cases: number;
-  deaths: number;
-  recovered: number;
-  tests: number;
-  countryInfo: CountryInfo;
-  todayCases: number;
-  todayDeaths: number;
-  active: number;
-  critical: number;
-  casesPerOneMillion: number;
-  deathsPerOneMilion: number;
-  testsPerOneMillion: number;
-}
-
-interface MarkerState {
-  countries: Array<CountryI>;
-  tracksViewChanges: boolean;
-  currentLatLong: {latitude: Number; longitude: Number};
-  visible: Boolean;
-  currentCountry: {
-    id: Number;
-    name: String;
-    prov: String;
-    flag: String;
-    latLong: {
-      latitude: number;
-      longitude: number;
-    };
-    cases: Number;
-    recovered: Number;
-    deaths: Number;
-    tests: Number;
-  };
-}
+import {MarkerState, CountryI} from './utils/MapInterfaces';
 class Map extends React.Component<{}, MarkerState> {
   constructor(props: any) {
     super(props);
@@ -77,7 +32,8 @@ class Map extends React.Component<{}, MarkerState> {
   }
   componentDidMount() {
     getData('/countries')
-      .then((response) => {
+      .then((response: Array<CountryI>) => {
+        console.log(response);
         this.setState({countries: response});
         setTimeout(this.disableViewChangesTracker, 1500);
       })
@@ -152,19 +108,15 @@ class Map extends React.Component<{}, MarkerState> {
         onMarkerPress={(e) => this.handlePressedRegion(e.nativeEvent)}>
         {!countries
           ? null
-          : countries.map((country) => {
-              const coordinate = {
-                latitude: country.countryInfo.lat,
-                longitude: country.countryInfo.long,
-              };
+          : countries.map((country: CountryI) => {
               const {
                 countryInfo: {_id},
               } = country;
-              if (_id !== null)
+
+              if (_id !== null) {
                 return (
                   <Pointer
                     key={_id}
-                    coordinate={coordinate}
                     tracksViewChanges={tracksViewChanges}
                     handleTracksViewChanges={() =>
                       this.disableViewChangesTracker
@@ -172,6 +124,7 @@ class Map extends React.Component<{}, MarkerState> {
                     countryData={country}
                   />
                 );
+              }
             })}
       </MapView>
     );
