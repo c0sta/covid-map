@@ -3,7 +3,13 @@ import {Marker} from 'react-native-maps';
 import {View, Text} from 'react-native';
 import {styles} from './Pointer.style';
 import {Card} from '../Card/Card';
-import {Props} from './utils/interfaces';
+import {CountryI} from '../Map/utils/MapInterfaces';
+
+export interface Props {
+  countryData: CountryI;
+  tracksViewChanges: boolean;
+  handleTracksViewChanges: Function;
+}
 
 export default function Pointer({
   tracksViewChanges,
