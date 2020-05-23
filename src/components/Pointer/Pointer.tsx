@@ -3,39 +3,21 @@ import {Marker} from 'react-native-maps';
 import {View, Text} from 'react-native';
 import {styles} from './Pointer.style';
 import {Card} from '../Card/Card';
-/** TYPES */
-interface Props {
-  country: String;
-  countryData: {
-    country: String;
-    cases: Number;
-    deaths: Number;
-    tests: Number;
-    recovered: Number;
-    countryInfo: {
-      _id: Number;
-      flag: String;
-      iso2: String;
-      iso3: String;
-    };
-  };
-  coordinate: {
-    latitude: Number | number;
-    longitude: Number | number;
-  };
-  tracksViewChanges: Boolean;
-  handleTracksViewChanges: Function;
-}
+import {Props} from './utils/interfaces';
 
 export default function Pointer({
-  coordinate,
   tracksViewChanges,
   countryData,
   handleTracksViewChanges,
 }: Props): ReactElement {
   /** Formats cases number */
   const [visible, setVisible] = React.useState(false);
-  const {cases, recovered} = countryData;
+  const {
+    country,
+    cases,
+    recovered,
+    countryInfo: {lat, long},
+  } = countryData;
 
   let casesString = `${cases}`;
   if (cases > 1000) {
@@ -45,7 +27,9 @@ export default function Pointer({
   return (
     <Marker
       onPress={() => setVisible(!visible)}
-      coordinate={coordinate}
+      identifier={country}
+      coordinate={{latitude: lat, longitude: long}}
+      opacity={0.9}
       tracksViewChanges={tracksViewChanges}>
       {!visible ? null : (
         <Card
@@ -55,7 +39,7 @@ export default function Pointer({
       )}
       <View
         style={
-          recovered > cases
+          recovered >= cases
             ? [styles.pointerContainer, styles.tooMuchRecovered]
             : [styles.pointerContainer, styles.tooMuchCases]
         }>
