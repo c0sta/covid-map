@@ -1,16 +1,44 @@
 import {StyleSheet} from 'react-native';
-
+import colors from '../../styles/colors';
 export const styles = StyleSheet.create({
   countryContainer: {
     flexDirection: 'row',
-    backgroundColor: '#212a37',
+    backgroundColor: colors.white,
     marginTop: 15,
     height: 65,
     borderRadius: 8,
-    padding: 5,
+    padding: 15,
+    justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
-  countryName: {
-    color: '#f1f1f1',
+  countryTitle: {
+    color: colors.black,
+    fontFamily: 'sans-serif',
+    fontSize: 15,
+  },
+  countryDescrition: {
+    fontSize: 13,
+    color: 'gray',
   },
   countryFlag: {width: 35, height: 35, borderRadius: 100},
+  casesConfirmed: {
+    fontSize: 16,
+    color: colors.black,
+  },
+  casesRecovered: {
+    fontSize: 16,
+    color: colors.green,
+  },
+  casesDeaths: {
+    fontSize: 16,
+    color: colors.red,
+  },
 });

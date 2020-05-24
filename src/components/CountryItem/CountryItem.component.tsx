@@ -2,7 +2,6 @@ import React, {ReactElement} from 'react';
 import {View, Text, Image} from 'react-native';
 import {CountryI} from '../Map/utils/MapInterfaces';
 import {styles} from './CountryItem.style';
-
 interface CountryItemI {
   item: CountryI;
 }
@@ -10,17 +9,21 @@ interface CountryItemI {
 export function CountryItem({item}: CountryItemI): ReactElement {
   return (
     <View style={styles.countryContainer}>
-      <View>
+      <View style={{flexDirection: 'row'}}>
         <Image
           style={styles.countryFlag}
           source={{
             uri: item.countryInfo.flag,
           }}
         />
-        <Text style={styles.countryName}>{item.country}</Text>
+        <View style={{marginHorizontal: 15}}>
+          <Text style={styles.countryTitle}>{item.country}</Text>
+          <Text style={styles.countryDescrition}>{item.continent}</Text>
+        </View>
       </View>
-      <Text style={styles.countryName}>{item.deaths}</Text>
-      <Text style={styles.countryName}>{item.testsPerOneMillion}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <Text style={styles.casesConfirmed}>{item.cases}</Text>
+      </View>
     </View>
   );
 }
