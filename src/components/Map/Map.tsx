@@ -2,10 +2,11 @@ import * as React from 'react';
 import MapView from 'react-native-maps';
 import {getData} from '../../services/get-data';
 import {getCountryNameByLatlng} from './services/map-api';
-import {mapStyle} from './styles/Map.dark';
+// import {mapStyle} from './styles/Map.dark';
 import {styles} from './Map.style';
 import Pointer from '../Pointer/Pointer';
 import {MarkerState, CountryI} from './utils/MapInterfaces';
+
 class Map extends React.Component<{}, MarkerState> {
   constructor(props: any) {
     super(props);
@@ -101,7 +102,7 @@ class Map extends React.Component<{}, MarkerState> {
     const {countries, tracksViewChanges} = this.state;
     return (
       <MapView
-        customMapStyle={mapStyle}
+        // customMapStyle={mapStyle}
         cacheEnabled={true}
         loadingEnabled={true}
         style={styles.mapView}
