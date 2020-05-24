@@ -30,7 +30,9 @@ export function Card({
         Recuperados: {currentCountry.recovered}
       </Text>
       <Text style={styles.cardNumber}>Mortes: {currentCountry.deaths}</Text>
-      <Text style={styles.cardNumber}>Testes: {currentCountry.tests}</Text>
+      <Text style={styles.cardNumber}>
+        Testes por milhão: {currentCountry.testsPerOneMillion}
+      </Text>
     </View>
   );
 }

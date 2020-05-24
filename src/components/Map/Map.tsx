@@ -13,7 +13,6 @@ class Map extends React.Component<{}, MarkerState> {
     this.state = {
       countries: [],
       tracksViewChanges: true,
-      visible: false,
       currentLatLong: {latitude: 0, longitude: 0},
       currentCountry: {
         id: 0,
@@ -36,18 +35,16 @@ class Map extends React.Component<{}, MarkerState> {
       .then((response: Array<CountryI>) => {
         console.log(response);
         this.setState({countries: response});
-        setTimeout(this.disableViewChangesTracker, 1500);
+        setTimeout(this.disableViewChangesTracker, 500);
       })
       .catch((err) => console.log(err));
   }
 
   disableViewChangesTracker = () => {
-    return this.setState({tracksViewChanges: false});
+    return this.setState({tracksViewChanges: !this.state.tracksViewChanges});
   };
 
   handlePressedRegion(event: any) {
-    this.setState({visible: !this.state.visible});
-
     const {
       coordinate: {latitude, longitude},
     } = event;
