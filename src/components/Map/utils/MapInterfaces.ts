@@ -28,7 +28,6 @@ export interface MarkerState {
   countries: Array<CountryI>;
   tracksViewChanges: boolean;
   currentLatLong: {latitude: number; longitude: number};
-  visible: Boolean;
   currentCountry: {
     id: number;
     name: string;
