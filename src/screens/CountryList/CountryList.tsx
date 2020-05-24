@@ -3,6 +3,7 @@ import {FlatList, SafeAreaView} from 'react-native';
 import {CountryI} from '../../components/Map/utils/MapInterfaces';
 import {getData} from '../../services/get-data';
 import {CountryItem} from '../../components/index';
+import {styles} from './CountryList.style';
 
 export default function CountryList(): ReactElement {
   const [countries, setCountries] = React.useState<CountryI[]>([]);
@@ -22,7 +23,7 @@ export default function CountryList(): ReactElement {
   );
 
   return (
-    <SafeAreaView style={{backgroundColor: '#38414e', padding: 10}}>
+    <SafeAreaView style={styles.listContainer}>
       <FlatList
         data={countries}
         renderItem={({item, index}) => _renderItem(item, index)}
