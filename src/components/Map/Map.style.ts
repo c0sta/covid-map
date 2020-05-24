@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+import colors from '../../styles/colors';
 export const styles = StyleSheet.create({
   mapView: {
     position: 'absolute',
@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: '#212a37',
+    backgroundColor: colors.white,
   },
   mapContainer: {
     flex: 1,
@@ -17,11 +17,11 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 2,
     borderColor: 'white',
-    backgroundColor: 'tomato',
+    backgroundColor: colors.red,
     color: 'white',
   },
   markerTitle: {
-    color: '#fff',
+    color: colors.white,
     // backgroundColor: 'blue',
     borderBottomEndRadius: 10,
     padding: 15,
