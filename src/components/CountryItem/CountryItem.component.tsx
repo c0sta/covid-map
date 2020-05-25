@@ -1,14 +1,16 @@
 import React, {ReactElement} from 'react';
-import {View, Text, Image} from 'react-native';
+import {TouchableOpacity, View, Text, Image} from 'react-native';
 import {CountryI} from '../Map/utils/MapInterfaces';
 import {styles} from './CountryItem.style';
+import {addCommas} from '../../utils/addCommas';
 interface CountryItemI {
   item: CountryI;
+  key?: number;
 }
 
 export function CountryItem({item}: CountryItemI): ReactElement {
   return (
-    <View style={styles.countryContainer}>
+    <TouchableOpacity style={styles.countryContainer}>
       <View style={{flexDirection: 'row'}}>
         <Image
           style={styles.countryFlag}
@@ -22,8 +24,8 @@ export function CountryItem({item}: CountryItemI): ReactElement {
         </View>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-        <Text style={styles.casesConfirmed}>{item.cases}</Text>
+        <Text style={styles.casesConfirmed}>{addCommas(item.todayCases)}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

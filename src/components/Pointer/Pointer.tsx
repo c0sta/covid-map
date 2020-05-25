@@ -35,7 +35,6 @@ export default function Pointer({
       onPress={() => setVisible(!visible)}
       identifier={country}
       coordinate={{latitude: lat, longitude: long}}
-      opacity={0.9}
       tracksViewChanges={tracksViewChanges}>
       {!visible ? null : (
         <Card

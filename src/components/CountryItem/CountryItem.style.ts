@@ -22,16 +22,16 @@ export const styles = StyleSheet.create({
   countryTitle: {
     color: colors.black,
     fontFamily: 'sans-serif',
-    fontSize: 15,
+    fontSize: 16,
   },
   countryDescrition: {
     fontSize: 13,
     color: 'gray',
   },
-  countryFlag: {width: 35, height: 35, borderRadius: 100},
+  countryFlag: {width: 40, height: 40, borderRadius: 100},
   casesConfirmed: {
-    fontSize: 16,
-    color: colors.black,
+    fontSize: 20,
+    color: colors.red,
   },
   casesRecovered: {
     fontSize: 16,
