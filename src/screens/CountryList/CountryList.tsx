@@ -1,9 +1,11 @@
 import React, {ReactElement} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {CountryI} from '../../components/Map/utils/MapInterfaces';
 import {getData} from '../../services/get-data';
 import {CountryItem} from '../../components/index';
 import {styles} from './CountryList.style';
+import {Title} from 'native-base';
+import colors from '../../styles/colors';
 
 export default function CountryList(): ReactElement {
   const [countries, setCountries] = React.useState<CountryI[]>([]);
@@ -11,7 +13,7 @@ export default function CountryList(): ReactElement {
   React.useEffect(() => {
     getData('/countries')
       .then((response: Array<CountryI>) => {
-        console.log('RESPONSE HERE ');
+        // console.log('RESPONSE HERE ');
         setCountries(response);
       })
       .catch((err) => console.log(err));
@@ -23,12 +25,26 @@ export default function CountryList(): ReactElement {
   );
 
   return (
-    <SafeAreaView style={styles.listContainer}>
+    <View
+      style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+      }}>
+      <Title
+        style={{
+          color: colors.text,
+          fontSize: 15,
+          marginTop: 10,
+        }}>
+        Today cases
+      </Title>
       <FlatList
-        data={countries}
+        style={styles.listContainer}
+        data={countries.sort((a, b) => a.todayCases < b.todayCases)}
         renderItem={({item, index}) => _renderItem(item, index)}
         keyExtractor={(item, index) => index.toString()}
       />
-    </SafeAreaView>
+    </View>
   );
 }
