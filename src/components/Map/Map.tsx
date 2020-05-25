@@ -33,7 +33,7 @@ class Map extends React.Component<{}, MarkerState> {
   componentDidMount() {
     getData('/countries')
       .then((response: Array<CountryI>) => {
-        console.log(response);
+        // console.log(response);
         this.setState({countries: response});
         setTimeout(this.disableViewChangesTracker, 500);
       })
@@ -60,7 +60,7 @@ class Map extends React.Component<{}, MarkerState> {
     getCountryNameByLatlng(latLongObject)
       .then((response: any) => {
         const {data} = response;
-        /** Filters country bt ISO2, e.g: CA, BR, US */
+        /** Filters country by ISO2, e.g: CA, BR, US */
         const selectedCountry = this.state.countries.filter(
           (country) => country.countryInfo.iso2 === data.prov,
         );
@@ -90,7 +90,7 @@ class Map extends React.Component<{}, MarkerState> {
             tests,
           },
         });
-        console.log(this.state.currentCountry);
+        // console.log(this.state.currentCountry);
       })
       .catch((error) => console.log(error));
   }
